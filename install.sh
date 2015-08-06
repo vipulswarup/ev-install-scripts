@@ -3,9 +3,10 @@
 #Date: 19 June 2015
 #NOTE: This script must be run as sudo or su
 #NOTE: This script uses the apt-get package manager, which is standard on ubuntu
-#NOTE: This script assumes Alfresco Root is /opt/alfresco
+#NOTE: This script assumes Alfresco Root is passed as a parameter
 
-alfresco_dir="/opt/alfresco"
+alfresco_dir=$1
+echo "Installing to $alfresco_dir"
 
 #step 1 - copy pdf2pdf.sh to /opt/ocr and make it executable
 
@@ -33,6 +34,9 @@ rm alfresco_oob.zip
 cp evThemes_eisenVaultTheme.amp $alfresco_dir/amps_share/
 cp share-amp.amp $alfresco_dir/amps_share/
 cp repo-amp.amp $alfresco_dir/amps/
+cp uploader-plus-repo-1.2.amp $alfresco_dir/amps/
+cp uploader-plus-surf-1.2.amp $alfresco_dir/amps_share/
+
 $alfresco_dir/bin/apply_amps.sh -force
 
 cp ev_share_header_modules.jar $alfresco_dir/tomcat/shared/lib
