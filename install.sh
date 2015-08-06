@@ -12,7 +12,7 @@ echo "Installing to $alfresco_dir"
 
 mkdir /opt/ocr
 cp pdf2pdf.sh /opt/ocr
-chmod a+x /opt/ocr/convert2pdf.sh
+chmod a+x /opt/ocr/pdf2pdf.sh
 
 #step 2 - stop alfresco
 $alfresco_dir/alfresco.sh stop
