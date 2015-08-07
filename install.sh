@@ -4,6 +4,7 @@
 #NOTE: This script must be run as sudo or su
 #NOTE: This script uses the apt-get package manager, which is standard on ubuntu
 #NOTE: This script assumes Alfresco Root is passed as a parameter
+#NOTE: Ensure the following packages are installed: ImageMagick, tesseract-ocr, poppler-utils
 
 alfresco_dir=$1
 echo "Installing to $alfresco_dir"
