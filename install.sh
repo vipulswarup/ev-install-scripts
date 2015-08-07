@@ -4,10 +4,13 @@
 #NOTE: This script must be run as sudo or su
 #NOTE: This script uses the apt-get package manager, which is standard on ubuntu
 #NOTE: This script assumes Alfresco Root is passed as a parameter
-#NOTE: Ensure the following packages are installed: ImageMagick, tesseract-ocr, poppler-utils
+#NOTE: Ensure the following packages are installed: ImageMagick, tesseract-ocr, poppler-utils, moreutils
 
 alfresco_dir=$1
 echo "Installing to $alfresco_dir"
+
+#step 0 - install dependencies
+apt-get install ImageMagick tesseract-ocr poppler-utils moreutils
 
 #step 1 - copy pdf2pdf.sh to /opt/ocr and make it executable
 
