@@ -1,39 +1,73 @@
 timestamp="$(date -u +%N)"
 #echo $timestamp
-tempfolder=/tmp/tesseract_temp_$timestamp
-echo $tempfolder
+tempfolder_tess=/tmp/tesseract_temp_$timestamp
+tempfolder_gs=/tmp/gs_temp_$timestamp
 
-mkdir $tempfolder
-convert           \
-   -density 200  \
-    $1      \
-    $tempfolder/temp_$timestamp.jpg
+echo "$tempfolder_tess"
+echo "$tempfolder_gs"
 
-jpgCount=$(ls -1 $tempfolder | wc -l)
+mkdir "$tempfolder_tess"
+mkdir "$tempfolder_gs"
+
+echo "mime type is $3" 
+
+if [ x"$3" = x"pdf" ]; then
+	echo "Attempting to burst pdf file" 
+	#attempt to split pdf into multiple pages
+	cd "$tempfolder_gs"
+	pdftk "$1" burst 
+	rm doc_data.txt
+	#attempt to convert each  page into jpeg using parallel processing
+	parallel --gnu "convert -density 175 {} {.}.jpg" ::: "$tempfolder_gs"/*
+	mv "$tempfolder_gs"/*.jpg "$tempfolder_tess"/
+else
+	if [ x"$3" = x"tiff" -o x"$3" = x"tif" ]; then
+		echo "Attempting to convert tiff to jpg" 	
+		convert           \
+   			-density 175  \
+    			"$1"      \
+    			"$tempfolder_tess"/temp_$timestamp.jpg
+	else
+		echo "Copying png or jpg to temp folder" 	
+		cp "$1" "$tempfolder_tess"
+	fi
+fi
+
+
+	
+
+jpgCount=$(ls -1 "$tempfolder_tess" | wc -l)
 echo $jpgCount
 
 if [ "$jpgCount" -gt "1" ]; then
+	echo "Attempting to run tesseract using parallel" 	
 	#if page count >1, use parallel to run tesseract and then assemble into target PDF
-	parallel --gnu "tesseract {} {.} pdf" ::: $tempfolder/*.jpg
-	pdfunite $tempfolder/*.pdf $2.pdf 2>/tmp/Alfresco/pdfunite.out
+	parallel --gnu "tesseract {} {.} pdf" ::: "$tempfolder_tess"/*.jpg
+	pdfunite "$tempfolder_tess"/*.pdf "$2".pdf 2>/tmp/Alfresco/pdfunite.out
 else
 	if [ "$jpgCount" -eq "1" ]; then
 		#if there is only 1 page, run simple tesseract and copy output to target file
-		cd "$tempfolder"
+		cd ""$tempfolder_tess""
 		currentFolder=$(pwd)
-		echo "currently in"		
-		echo $currentFolder
-		echo "Source file = temp_"+$timestamp+".jpg"
-		sourceJPG=temp_$timestamp.jpg
-		sourceTIFF=temp_$timestamp.tiff
+		echo "Going to convert single file of mimetype $3" 
+		sourceFile=""
+		#set source file name based on mimetype
+		if [ x"$3" = x"png" -o x"$3" = x"jpg" -o x"$3" = $3"jpeg" ]; then 
+			sourceFile="$1"
+			echo "Source file = $sourceFile"
+		else
+				sourceFile=temp_$timestamp.jpg
+				echo "Source file = $sourceFile" 
+			
+		fi
+		echo "Source file for single page conversion is $sourceFile" 
 		targetPDF=temp_out_$timestamp
-		#convert $sourceJPG $sourceTIFF
-		tesseract $sourceJPG $targetPDF pdf 
+		tesseract "$sourceFile" "$targetPDF" pdf 
 		currentFolder=$(pwd)
 		echo "currently in"		
 		echo $currentFolder
 		ls -al
-		cp $targetPDF.pdf $2
+		cp $targetPDF.pdf "$2"
 	else
 		echo "found 0 files"
 		exit 1
@@ -41,7 +75,8 @@ else
 fi
 
 
-rm -rf $tempfolder
+rm -rf "$tempfolder_tess"
+rm -rf "$tempfolder_gs"
 
 exit 0
 
