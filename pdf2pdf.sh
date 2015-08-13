@@ -10,6 +10,7 @@ mkdir "$tempfolder_tess"
 mkdir "$tempfolder_gs"
 
 echo "mime type is $3" 
+echo "language is $4"
 
 if [ x"$3" = x"pdf" ]; then
 	echo "Attempting to burst pdf file" 
@@ -18,6 +19,7 @@ if [ x"$3" = x"pdf" ]; then
 	pdftk "$1" burst 
 	rm doc_data.txt
 	#attempt to convert each  page into jpeg using parallel processing
+	echo "Executing: parallel --gnu convert -density 175 {} {.}.jpg ::: $tempfolder_gs/*" 
 	parallel --gnu "convert -density 175 {} {.}.jpg" ::: "$tempfolder_gs"/*
 	mv "$tempfolder_gs"/*.jpg "$tempfolder_tess"/
 else
@@ -42,7 +44,8 @@ echo $jpgCount
 if [ "$jpgCount" -gt "1" ]; then
 	echo "Attempting to run tesseract using parallel" 	
 	#if page count >1, use parallel to run tesseract and then assemble into target PDF
-	parallel --gnu "tesseract {} {.} pdf" ::: "$tempfolder_tess"/*.jpg
+	echo "Executing: parallel --gnu tesseract {} {.} pdf -l $4 ::: $tempfolder_tess/*.jpg" 
+	parallel --gnu "tesseract -l $4 {} {.} pdf" ::: "$tempfolder_tess"/*.jpg
 	pdfunite "$tempfolder_tess"/*.pdf "$2".pdf 2>/tmp/Alfresco/pdfunite.out
 else
 	if [ "$jpgCount" -eq "1" ]; then
@@ -62,7 +65,7 @@ else
 		fi
 		echo "Source file for single page conversion is $sourceFile" 
 		targetPDF=temp_out_$timestamp
-		tesseract "$sourceFile" "$targetPDF" pdf 
+		tesseract "-l" "$4" "$sourceFile" "$targetPDF" "pdf" 
 		currentFolder=$(pwd)
 		echo "currently in"		
 		echo $currentFolder
