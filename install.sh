@@ -10,7 +10,7 @@ alfresco_dir=$1
 echo "Installing to $alfresco_dir"
 
 #step 0 - install dependencies
-apt-get install ImageMagick tesseract-ocr-eng tesseract-ocr-ben tesseract-ocr-hin poppler-utils parallel pdftk
+apt-get install ImageMagick tesseract-ocr-eng tesseract-ocr-ben tesseract-ocr-hin poppler-utils parallel pdftk zip
 
 #step 1 - copy pdf2pdf.sh to /opt/ocr and make it executable
 
