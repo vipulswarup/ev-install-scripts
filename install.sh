@@ -40,8 +40,6 @@ cp share-amp.amp $alfresco_dir/amps_share/
 cp repo-amp.amp $alfresco_dir/amps/
 cp uploader-plus-repo-1.2.amp $alfresco_dir/amps/
 cp uploader-plus-surf-1.2.amp $alfresco_dir/amps_share/
-cp alfresco_login_reset_repo.amp $alfresco_dir/amps/
-cp alfresco_login_reset_share.amp $alfresco_dir/amps_share/
 
 $alfresco_dir/bin/apply_amps.sh -force
 
