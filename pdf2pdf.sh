@@ -61,6 +61,8 @@ else
 		else
 				sourceFile=temp_$timestamp.jpg
 				echo "Source file = $sourceFile" 
+				echo "Renaming temp jpg file"
+                                mv ./*.jpg ./$sourceFile
 			
 		fi
 		echo "Source file for single page conversion is $sourceFile" 
