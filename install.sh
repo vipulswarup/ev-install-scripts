@@ -27,6 +27,8 @@ zip -r ../share_oob.zip .
 cd ../alfresco_oob
 zip -r ../alfresco_oob.zip .
 cd ..
+rm $alfresco_dir/tomcat/webapps/share.war
+rm $alfresco_dir/tomcat/webapps/alfresco.war
 cp share_oob.zip $alfresco_dir/tomcat/webapps/share.war
 cp alfresco_oob.zip $alfresco_dir/tomcat/webapps/alfresco.war
 
@@ -57,5 +59,8 @@ rm /opt/alfresco/*.log
 #step 7 - start alfresco
 echo "Trying to start alfresco"
 $alfresco_dir/alfresco.sh start
+
+
+
 
 
