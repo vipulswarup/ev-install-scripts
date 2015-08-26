@@ -16,8 +16,8 @@ rm $alfresco_dir/tomcat/webapps/share/WEB-INF/classes/alfresco/site-data/themes/
 cp ./share-header.lib.js $alfresco_dir/tomcat/webapps/share/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/share/imports/
 
 #step 9 - delete war files, so they are not redeployed
-rm $alfresco_dir/tomcat/webapps/alfresco.war
-rm $alfresco_dir/tomcat/webapps/share.war
+#rm $alfresco_dir/tomcat/webapps/alfresco.war
+#rm $alfresco_dir/tomcat/webapps/share.war
 
 #step 10 - delete war backup files, to save space
 rm $alfresco_dir/tomcat/webapps/alfresco.war*.bak
