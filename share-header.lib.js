@@ -955,9 +955,12 @@ function getUserMenuWidgets()
          config:
          {
             id: "HEADER_USER_MENU_HELP",
-            label: "help.label",
+	    //Raghav Bhardwaj - 25 Sep 2015 - changed label to "About Us"
+            label: "About Us",
             iconClass: "alf-user-help-icon",
-            targetUrl: getHelpLink(),
+            //Raghav Bhardwaj - 25 Sep 2015 - changed target URL
+	    targetUrl: getHelpLink(),
+	    //targetUrl: "www.eisenvault.com/company",
             targetUrlType: "FULL_PATH",
             targetUrlLocation: "NEW"
          }

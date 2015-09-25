@@ -14,6 +14,7 @@ rm $alfresco_dir/tomcat/webapps/share/WEB-INF/classes/alfresco/site-data/themes/
 
 #step 2 - replace js file to change search results page header
 cp ./share-header.lib.js $alfresco_dir/tomcat/webapps/share/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/share/imports/
+cp ./toolbar.lib.js $alfresco_dir/tomcat/webapps/share/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/documentlibrary/include/
 
 #step 9 - delete war files, so they are not redeployed
 #rm $alfresco_dir/tomcat/webapps/alfresco.war
