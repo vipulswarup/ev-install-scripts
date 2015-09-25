@@ -44,6 +44,8 @@ cp uploader-plus-repo-1.2.amp $alfresco_dir/amps/
 cp uploader-plus-surf-1.2.amp $alfresco_dir/amps_share/
 cp reposize-dashlet-repo.amp $alfresco_dir/amps/
 cp reposize-dashlet-share.amp $alfresco_dir/amps_share/
+cp share-site-creators-repo.amp $alfresco_dir/amps/
+cp share-site-creators-share.amp $alfresco_dir/amps_share/
 
 $alfresco_dir/bin/apply_amps.sh -force
 
