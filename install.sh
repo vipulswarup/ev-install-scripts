@@ -45,7 +45,7 @@ cp uploader-plus-surf-1.2.amp $alfresco_dir/amps_share/
 cp reposize-dashlet-repo.amp $alfresco_dir/amps/
 cp reposize-dashlet-share.amp $alfresco_dir/amps_share/
 
-$alfresco_dir/bin/apply_amps.sh -force
+$alfresco_dir/bin/apply_amps.sh -force -verbose
 
 rm $alfresco_dir/tomcat/shared/lib/*.jar
 cp *.jar $alfresco_dir/tomcat/shared/lib
