@@ -29,6 +29,8 @@ zip -r ../alfresco_oob.zip .
 cd ..
 rm $alfresco_dir/tomcat/webapps/share.war
 rm $alfresco_dir/tomcat/webapps/alfresco.war
+rm -rf $alfresco_dir/tomcat/webapps/share
+rm -rf $alfresco_dir/tomcat/webapps/alfresco
 cp share_oob.zip $alfresco_dir/tomcat/webapps/share.war
 cp alfresco_oob.zip $alfresco_dir/tomcat/webapps/alfresco.war
 
