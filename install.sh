@@ -58,7 +58,7 @@ mkdir /tmp/Alfresco
 
 #step 6 - remove old alfresco, solr4 and share log files
 echo "Trying to remove log files"
-rm /opt/alfresco/*.log
+rm $alfresco_dir/*.log
 
 #step 7 - start alfresco
 echo "Trying to start alfresco"
