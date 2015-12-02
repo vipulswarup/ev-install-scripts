@@ -16,15 +16,19 @@ rm $alfresco_dir/tomcat/webapps/share/WEB-INF/classes/alfresco/site-data/themes/
 cp ./share-header.lib.js $alfresco_dir/tomcat/webapps/share/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/share/imports/
 cp ./toolbar.lib.js $alfresco_dir/tomcat/webapps/share/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/documentlibrary/include/
 
-#step 9 - delete war files, so they are not redeployed
+#step 3 - add files for the repo-size dashlet to work
+cp dashlet/* $alfresco_dir/tomcat/webapps/share/components/dashlets
+
+
+#step 4 - delete war files, so they are not redeployed
 #rm $alfresco_dir/tomcat/webapps/alfresco.war
 #rm $alfresco_dir/tomcat/webapps/share.war
 
-#step 10 - delete war backup files, to save space
+#step 5 - delete war backup files, to save space
 rm $alfresco_dir/tomcat/webapps/alfresco.war*.bak
 rm $alfresco_dir/tomcat/webapps/share.war*.bak
 
 
-#step 11 - start alfresco
+#step 6 - start alfresco
 echo "Trying to start alfresco"
 $alfresco_dir/alfresco.sh start
