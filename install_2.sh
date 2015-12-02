@@ -17,7 +17,7 @@ cp ./share-header.lib.js $alfresco_dir/tomcat/webapps/share/WEB-INF/classes/alfr
 cp ./toolbar.lib.js $alfresco_dir/tomcat/webapps/share/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/documentlibrary/include/
 
 #step 3 - add files for the repo-size dashlet to work
-cp dashlet/* $alfresco_dir/tomcat/webapps/share/components/dashlets
+cp dashlets/* $alfresco_dir/tomcat/webapps/share/components/dashlets
 
 
 #step 4 - delete war files, so they are not redeployed
