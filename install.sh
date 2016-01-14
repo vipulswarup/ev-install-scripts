@@ -42,6 +42,7 @@ rm alfresco_oob.zip
 cp evThemes_eisenVaultTheme.amp $alfresco_dir/amps_share/
 cp share-amp.amp $alfresco_dir/amps_share/
 cp repo-amp.amp $alfresco_dir/amps/
+cp alfresco-bulk-import-2.0.1.amp $alfresco_dir/amps/
 cp uploader-plus-repo-1.2.amp $alfresco_dir/amps/
 cp uploader-plus-surf-1.2.amp $alfresco_dir/amps_share/
 cp reposize-dashlet-repo.amp $alfresco_dir/amps/
