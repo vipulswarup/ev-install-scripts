@@ -13,14 +13,6 @@ echo "mime type is $3"
 echo "language is $4"
 
 if [ x"$3" = x"pdf" ]; then
-	#echo "pdffonts $1"
-        #checkpdf=$(pdffonts $1 | grep yes)
-	#echo "$checkpdf"
-        #if [ ! -z "$checkpdf" ]; then
-                #echo "File already readable to need to OCR it. Exiting."
-               # exit 0
-        #fi
-
 	echo "Attempting to burst pdf file" 
 	#attempt to split pdf into multiple pages
 	cd "$tempfolder_gs"
@@ -54,16 +46,7 @@ if [ "$jpgCount" -gt "1" ]; then
 	#if page count >1, use parallel to run tesseract and then assemble into target PDF
 	echo "Executing: parallel --gnu tesseract {} {.} pdf -l $4 ::: $tempfolder_tess/*.jpg" 
 	parallel --gnu "tesseract -l $4 {} {.} pdf" ::: "$tempfolder_tess"/*.jpg
-	#loop the folder; convert the ocr'ed pdf pages into smaller size
-	for f in $tempfolder_tess/*.pdf
-	do
-  		echo "Processing $f file..."
-		filename=$(cut -d/ -f4 <<< $f)
-		# take action on each file. reduce the size using ghostscript
-		gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$tempfolder_ocr/$filename $f
-	done
-
-	pdfunite "$tempfolder_ocr"/*.pdf "$2".pdf 2>/tmp/Alfresco/pdfunite.out
+	pdfunite "$tempfolder_tess"/*.pdf "$2".pdf 2>/tmp/Alfresco/pdfunite.out
 else
 	if [ "$jpgCount" -eq "1" ]; then
 		#if there is only 1 page, run simple tesseract and copy output to target file
