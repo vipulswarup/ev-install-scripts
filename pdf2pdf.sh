@@ -1,3 +1,4 @@
+#!/bin/bash
 timestamp="$(date -u +%N)"
 #echo $timestamp
 tempfolder_tess=/tmp/tesseract_temp_$timestamp
