@@ -1,14 +1,16 @@
-#!/bin/bash
 timestamp="$(date -u +%N)"
 #echo $timestamp
 tempfolder_tess=/tmp/tesseract_temp_$timestamp
 tempfolder_gs=/tmp/gs_temp_$timestamp
+#tempfolder_ocr=/tmp/ocr_temp_$timestamp
 
 echo "$tempfolder_tess"
 echo "$tempfolder_gs"
+#echo "$tempfolder_ocr"
 
 mkdir "$tempfolder_tess"
 mkdir "$tempfolder_gs"
+#mkdir "$tempfolder_ocr"
 
 echo "mime type is $3" 
 echo "language is $4"
@@ -56,15 +58,16 @@ if [ "$jpgCount" -gt "1" ]; then
 	echo "Executing: parallel --gnu tesseract {} {.} pdf -l $4 ::: $tempfolder_tess/*.jpg" 
 	parallel --gnu "tesseract -l $4 {} {.} pdf" ::: "$tempfolder_tess"/*.jpg
 	#loop the folder; convert the ocr'ed pdf pages into smaller size
-	for f in $tempfolder_tess/*.pdf
-	do
-  		echo "Processing $f file..."
-		filename=$(cut -d/ -f4 <<< $f)
+	#for f in $tempfolder_tess/*.pdf
+	#do
+  		#echo "Processing $f file..."
+		#filename=$(cut -d/ -f4 <<< $f)
 		# take action on each file. reduce the size using ghostscript
-		gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$tempfolder_ocr/$filename $f
-	done
+		#gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$tempfolder_ocr/$filename $f
+	#done
 
-	pdfunite "$tempfolder_ocr"/*.pdf "$2".pdf 2>/tmp/Alfresco/pdfunite.out
+	#pdfunite "$tempfolder_ocr"/*.pdf "$2".pdf 2>/tmp/Alfresco/pdfunite.out
+	pdfunite "$tempfolder_tess"/*.pdf "$2".pdf 2>/tmp/Alfresco/pdfunite.out
 else
 	if [ "$jpgCount" -eq "1" ]; then
 		#if there is only 1 page, run simple tesseract and copy output to target file
