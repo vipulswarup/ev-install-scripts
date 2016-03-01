@@ -46,7 +46,7 @@ if [ "$jpgCount" -gt "1" ]; then
 	#if page count >1, use parallel to run tesseract and then assemble into target PDF
 	echo "Executing: parallel --gnu tesseract {} {.} pdf -l $4 ::: $tempfolder_tess/*.jpg" 
 	parallel --gnu "tesseract -l $4 {} {.} pdf" ::: "$tempfolder_tess"/*.jpg
-	pdfunite "$tempfolder_tess"/*.pdf "$2".pdf 2>/tmp/Alfresco/pdfunite.out
+	pdfunite "$tempfolder_tess"/*.pdf "$2".pdf 2>/tmp/pdfunite.out
 else
 	if [ "$jpgCount" -eq "1" ]; then
 		#if there is only 1 page, run simple tesseract and copy output to target file
