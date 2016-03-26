@@ -9,4 +9,4 @@ export LC_ALL=en_US.UTF-8
 locale-gen en_US.UTF-8
 dpkg-reconfigure locales
 
-apt-get install postgres
+apt-get install postgresql
