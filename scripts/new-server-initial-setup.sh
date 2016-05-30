@@ -9,3 +9,4 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 locale-gen en_US.UTF-8
 dpkg-reconfigure locales
+git config --global http.sslverify false
