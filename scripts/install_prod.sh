@@ -56,6 +56,9 @@ $alfresco_dir/bin/apply_amps.sh -force -verbose
 rm $alfresco_dir/tomcat/shared/lib/*.jar
 #cp ../jars/*.jar $alfresco_dir/tomcat/shared/lib
 
+#Backing alfresco-global.properties
+cp -p $alfresco_dir/tomcat/shared/classes/alfresco-global.properties $alfresco_dir/tomcat/shared/classes/alfresco-global.properties_bak 
+
 #step 5 make a temp directory
 echo "Trying to create temporary directory"
 mkdir /tmp/Alfresco
