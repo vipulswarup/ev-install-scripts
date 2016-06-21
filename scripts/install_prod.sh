@@ -43,7 +43,7 @@ echo "Copying repo amps"
 cp ../amps/alfresco-bulk-import-2.0.1.amp $alfresco_dir/amps/
 cp ../amps/repo-amp.amp $alfresco_dir/amps/
 cp ../amps/uploader-plus-repo-1.2.amp $alfresco_dir/amps/
-cp ../amps/reposize-dashlet-repo.amp $alfresco_dir/amps/
+cp ../amps/reposize-repo.amp $alfresco_dir/amps/
 
 echo "Copying share amps"
 cp ../amps_share/evThemes_eisenVaultTheme.amp $alfresco_dir/amps_share/
