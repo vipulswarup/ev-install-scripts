@@ -50,6 +50,7 @@ cp ../amps_share/evThemes_eisenVaultTheme.amp $alfresco_dir/amps_share/
 cp ../amps_share/share-amp.amp $alfresco_dir/amps_share/
 cp ../amps_share/uploader-plus-surf-1.2.amp $alfresco_dir/amps_share/
 cp ../amps_share/reposize-dashlet-share.amp $alfresco_dir/amps_share/
+cp ../amps_share/wf-search-share.amp $alfresco_dir/amps_share/
 
 $alfresco_dir/bin/apply_amps.sh -force -verbose
 
