@@ -10,7 +10,7 @@ alfresco_dir=$1
 echo "Installing to $alfresco_dir"
 
 #step 0 - install dependencies
-apt-get install ImageMagick tesseract-ocr tesseract-ocr-eng tesseract-ocr-ben tesseract-ocr-hin poppler-utils parallel pdftk zip
+apt-get install tesseract-ocr tesseract-ocr-eng tesseract-ocr-ben tesseract-ocr-hin poppler-utils parallel pdftk zip
 
 #step 1 - copy pdf2pdf.sh to /opt/ocr and make it executable
 
@@ -40,17 +40,18 @@ rm ../ev_custom_files/alfresco_oob.zip
 #step 4 copy and apply AMP file with Alfresco code changes
 #to be done manually
 echo "Copying repo amps"
-cp ../amps/alfresco-bulk-import-2.0.1.amp $alfresco_dir/amps/
-cp ../amps/repo-amp.amp $alfresco_dir/amps/
-cp ../amps/uploader-plus-repo-1.2.amp $alfresco_dir/amps/
-cp ../amps/reposize-repo.amp $alfresco_dir/amps/
-
+#cp ../amps/alfresco-bulk-import-2.0.1.amp $alfresco_dir/amps/
+#cp ../amps/repo-amp.amp $alfresco_dir/amps/
+#cp ../amps/uploader-plus-repo-1.2.amp $alfresco_dir/amps/
+#cp ../amps/reposize-repo.amp $alfresco_dir/amps/
+cp ../amps/*.amp $alfresco_dir/amps/
+cp ../amps_share/*.amp $alfresco_dir/amps_share/
 echo "Copying share amps"
-cp ../amps_share/evThemes_eisenVaultTheme.amp $alfresco_dir/amps_share/
-cp ../amps_share/share-amp.amp $alfresco_dir/amps_share/
-cp ../amps_share/uploader-plus-surf-1.2.amp $alfresco_dir/amps_share/
-cp ../amps_share/reposize-dashlet-share.amp $alfresco_dir/amps_share/
-cp ../amps_share/wf-search-share.amp $alfresco_dir/amps_share/
+#cp ../amps_share/evThemes_eisenVaultTheme.amp $alfresco_dir/amps_share/
+#cp ../amps_share/share-amp.amp $alfresco_dir/amps_share/
+#cp ../amps_share/uploader-plus-surf-1.2.amp $alfresco_dir/amps_share/
+#cp ../amps_share/reposize-dashlet-share.amp $alfresco_dir/amps_share/
+#cp ../amps_share/wf-search-share.amp $alfresco_dir/amps_share/
 
 $alfresco_dir/bin/apply_amps.sh -force -verbose
 
